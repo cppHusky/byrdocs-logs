@@ -55,7 +55,7 @@
 	"r2_buckets": [
 		{
 			"binding": "R2_BUCKET",
-			"bucket_name": "byrdocs"
+			"bucket_name": "byrdocs-logs"
 		}
 	]
 }

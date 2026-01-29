@@ -1,4 +1,5 @@
 import html from '../index.html';
+import { gzipSync } from 'fflate';
 
 interface LogEntry {
 	timestamp: string;
@@ -71,12 +72,14 @@ async function fetchLogsByDate(env: Env, targetDate?: string): Promise<LogEntry[
 }
 
 async function saveLogsToR2(env: Env, logs: LogEntry[], date: string): Promise<void> {
-	const fileName = `logs/${date}.json`;
+	const fileName = `${date}.json.gz`;
 	const logsJson = JSON.stringify(logs);
+	const logsBuffer = new TextEncoder().encode(logsJson);
+	const logsGzip = gzipSync(logsBuffer);
 
-	await env.R2_BUCKET.put(fileName, logsJson, {
+	await env.R2_BUCKET.put(fileName, logsGzip, {
 		httpMetadata: {
-			contentType: 'application/json',
+			contentType: 'application/gzip',
 		},
 	});
 

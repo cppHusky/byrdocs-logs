@@ -11,5 +11,8 @@
 	"devDependencies": {
 		"typescript": "^5.5.2",
 		"wrangler": "^4.20.3"
+	},
+	"dependencies": {
+		"fflate": "^0.8.2"
 	}
 }
