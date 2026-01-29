@@ -1,0 +1,17 @@
+"$schema" = "node_modules/wrangler/config-schema.json"
+name = "byrdocs-logs"
+main = "src/index.ts"
+compatibility_date = "2025-06-19"
+
+[observability]
+enabled = true
+
+[triggers]
+crons = ["30 0 * * *"]
+
+[vars]
+CLOUDFLARE_ACCOUNT_ID = "a6505a79acc45f43c2431aa13fa7578f"
+
+[[r2_buckets]]
+binding = "R2_BUCKET"
+bucket_name = "byrdocs-analytics"
